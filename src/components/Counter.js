@@ -1,28 +1,33 @@
 import { useDispatch, useSelector } from "react-redux";
 import classes from "./Counter.module.css";
+import { CounterSliceActions } from "../store/index";
 
 const Counter = () => {
   const counter = useSelector((state) => state.counter);
+  const isVisible = useSelector((state) => state.isCounterInvisible);
 
   const dispatchFunction = useDispatch();
 
-  const decrementHandler = () => {
-    dispatchFunction({ type: "DECREMENT" });
+  const incrementHandler = (number) => {
+    dispatchFunction(CounterSliceActions.increment(number));
   };
 
-  const incrementHandler = () => {
-    dispatchFunction({ type: "INCREMENT" });
+  const decrementHandler = (number) => {
+    dispatchFunction(CounterSliceActions.decrement(number));
   };
 
-  const toggleCounterHandler = () => {};
+  const toggleCounterHandler = () => {
+    dispatchFunction(CounterSliceActions.changeVisibility());
+  };
 
   return (
     <main className={classes.counter}>
       <h1>Счётчик</h1>
-      <div className={classes.value}>{counter}</div>
+      {!isVisible && <div className={classes.value}>{counter}</div>}
       <div>
-        <button onClick={incrementHandler}>+</button>
-        <button onClick={decrementHandler}>-</button>
+        <button onClick={incrementHandler.bind(this, 1)}>+</button>
+        <button onClick={incrementHandler.bind(this, 10)}>+10</button>
+        <button onClick={decrementHandler.bind(this, 1)}>-</button>
       </div>
       <button onClick={toggleCounterHandler}>Спрятать / Показать</button>
     </main>
