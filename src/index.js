@@ -6,10 +6,14 @@ import store from "./store/index";
 
 import "./index.css";
 import App from "./App";
+import Header from "./components/Header";
+import Auth from "./components/Auth";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
+    <Header />
+    <Auth />
     <App />
   </Provider>
 );

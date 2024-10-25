@@ -3,8 +3,10 @@ import classes from "./Counter.module.css";
 import { CounterSliceActions } from "../store/index";
 
 const Counter = () => {
-  const counter = useSelector((state) => state.counter);
-  const isVisible = useSelector((state) => state.isCounterInvisible);
+  const counter = useSelector((state) => state.counterSlice.counter);
+  const isVisible = useSelector(
+    (state) => state.counterSlice.isCounterInvisible
+  );
 
   const dispatchFunction = useDispatch();
 
