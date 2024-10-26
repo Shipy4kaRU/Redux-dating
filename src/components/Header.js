@@ -1,6 +1,15 @@
+import { useDispatch, useSelector } from "react-redux";
+import { userAuthSliceActions } from "../store";
 import classes from "./Header.module.css";
 
-const Header = (props) => {
+const Header = () => {
+  const isAuth = useSelector((state) => state.userAuthSlice.isUserLoggedIn);
+  const dispatchFunction = useDispatch();
+
+  const onExitHandler = () => {
+    dispatchFunction(userAuthSliceActions.signOut());
+  };
+
   return (
     <header className={classes.header}>
       <h1>Redux</h1>
@@ -15,14 +24,14 @@ const Header = (props) => {
           <li>
             <a href="/">Контакты</a>
           </li>
-          {props.isLogIn && (
+          {isAuth && (
             <li>
               <a href="/">Мои покупки</a>
             </li>
           )}
           <li>
-            <button onClick={props.isLogIn ? props.onExit : null}>{`${
-              props.isLogIn ? "Выйти" : "Войти"
+            <button onClick={isAuth ? onExitHandler : null}>{`${
+              isAuth ? "Выйти" : "Войти"
             }`}</button>
           </li>
         </ul>
