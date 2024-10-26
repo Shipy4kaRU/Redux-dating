@@ -1,7 +1,7 @@
 import classes from "./Auth.module.css";
 import useValidation from "../customHooks/useValidation";
 import { useDispatch } from "react-redux";
-import { userAuthSliceActions } from "../store";
+import { userAuthSliceActions } from "../store/userAuthSlice";
 
 const Auth = (props) => {
   const emailValidation = useValidation((value) => value.trim().includes("@"));
