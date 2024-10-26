@@ -1,6 +1,6 @@
 import classes from "./Header.module.css";
 
-const Header = () => {
+const Header = (props) => {
   return (
     <header className={classes.header}>
       <h1>Redux</h1>
@@ -15,8 +15,15 @@ const Header = () => {
           <li>
             <a href="/">Контакты</a>
           </li>
+          {props.isLogIn && (
+            <li>
+              <a href="/">Мои покупки</a>
+            </li>
+          )}
           <li>
-            <button>Выйти</button>
+            <button onClick={props.isLogIn ? props.onExit : null}>{`${
+              props.isLogIn ? "Выйти" : "Войти"
+            }`}</button>
           </li>
         </ul>
       </nav>

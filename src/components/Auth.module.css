@@ -17,6 +17,7 @@
   color: #616161;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
+  transition: color 0.4s ease-in;
 }
 
 .control input {
@@ -26,4 +27,18 @@
   border-radius: 4px;
   padding: 0.25rem;
   border: 1px solid #ccc;
+  transition: border-color 0.4s ease-in;
+}
+
+.control-error label {
+  color: red;
+}
+
+.control-error input {
+  border-color: red;
+}
+
+.control:hover input,
+.control-error:hover input {
+  border-color: blue;
 }
