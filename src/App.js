@@ -2,25 +2,23 @@ import Counter from "./components/Counter";
 import Header from "./components/Header";
 import Auth from "./components/Auth";
 import UserProfile from "./components/UserProfile";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userAuthSliceActions } from "./store/index";
 
 function App() {
-  const [isFormValid, setIsFormValid] = useState(false);
-
-  const onformValidHandler = (state) => {
-    setIsFormValid(state);
-  };
+  const isAuth = useSelector((state) => state.userAuthSlice.isUserLoggedIn);
+  const dispatchFunction = useDispatch();
 
   const onExitHandler = () => {
-    setIsFormValid(false);
+    dispatchFunction(userAuthSliceActions.signOut());
   };
 
   return (
     <div>
-      <Header isLogIn={isFormValid} onExit={onExitHandler} />
-      {isFormValid && <UserProfile />}
-      {!isFormValid && <Auth onFormValid={onformValidHandler} />}
-      {isFormValid && <Counter />}
+      <Header isLogIn={isAuth} onExit={onExitHandler} />
+      {isAuth && <UserProfile />}
+      {!isAuth && <Auth />}
+      {isAuth && <Counter />}
     </div>
   );
 }

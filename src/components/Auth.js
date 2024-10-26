@@ -1,15 +1,17 @@
 import classes from "./Auth.module.css";
 import useValidation from "../customHooks/useValidation";
+import { useDispatch } from "react-redux";
+import { userAuthSliceActions } from "../store";
 
 const Auth = (props) => {
   const emailValidation = useValidation((value) => value.trim().includes("@"));
   const passwordValidation = useValidation((value) => value.trim().length > 7);
 
-  const isFormValid = emailValidation.isValid && passwordValidation.isValid;
+  const dispatchFunction = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
-    props.onFormValid(isFormValid);
+    dispatchFunction(userAuthSliceActions.logIn());
     emailValidation.inputResetHandler();
     passwordValidation.inputResetHandler();
   };
